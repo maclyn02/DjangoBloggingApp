@@ -1,23 +1,12 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Post Details</title>
-</head>
-<body>
-    <div class="header">
-        <h1> 안녕 세상아 ~ ~ </h1>
-    </div>
+{% extends 'blog/base_page.html' %}
+
+{% block content %}
+    {% if post_details.published_date %}
     <div>
-        {% if post_details.published_date %}
-            <div>{{ post_details.published_date }}</div>
-            <h1>{{ post_details.title }}</h1>
-            <p>{{ post_details.text | linebreaksbr }}</p>
-            <h3>By : {{ post_details.author }}</h3>
-        {% endif %}
+        <p>{{ post_details.published_date }}</p>
+        <h1>{{ post_details.title }}</h1>
+        <p>{{ post_details.text | linebreaksbr }}</p>
+        <h3>By : {{ post_details.author }}</h3>
     </div>
-</body>
-</html>
+    {% endif %}
+{% endblock %}
