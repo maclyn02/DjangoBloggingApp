@@ -2,8 +2,8 @@
 
 {% block content %}
     {% for post in posts %}
-    <div>
-        <p> {{ post.published_date }} </p>
+    <div class="row-content">
+        <p class="date"> {{ post.published_date }} </p>
         <h2><a href="{% url 'post_details' primary_key=post.pk %}"> {{ post.title }} </a></h2>
         <p> {{ post.text | linebreaksbr }} </p>
     </div>

@@ -2,11 +2,11 @@
 
 {% block content %}
     {% if post_details.published_date %}
-    <div>
-        <p>{{ post_details.published_date }}</p>
+    <div class="">
+        <p class="date">{{ post_details.published_date }}</p>
         <h1>{{ post_details.title }}</h1>
         <p>{{ post_details.text | linebreaksbr }}</p>
-        <h3>By : {{ post_details.author }}</h3>
+        <p class="author">By : {{ post_details.author }}</p>
     </div>
     {% endif %}
 {% endblock %}
