@@ -70,11 +70,11 @@ body a{
     justify-content: space-between;
 }
 
-.fas {
+.details-header-row .fas {
     padding: 10px;
     color: dimgray;
     font-size: 20px;
 }
-.fas:hover{
+.details-header-row .fas:hover{
     color: darkslategray;
 }

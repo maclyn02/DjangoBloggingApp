@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/3f587df534.js" crossorigin="anonymous"></script>
 
     {% load static %}
@@ -14,14 +15,23 @@
 <body>
     <div class="header">
         <div><a href="{% url 'post_list' %}"> 안녕 세상아 ~ ~ </a></div>
-        <div><a href="{% url 'post_new' %}">+</a></div>
+        <div>
+            <a href="{% url 'post_new' %}" data-toggle="tooltip" title="Create a new post"><i class="fas fa-plus-circle"></i></a>
+            <a href="{% url 'post_new' %}"><i class="fas fa-user-circle"></i></a>
+        </div>
     </div>
-
     <div class="content-container">
         <div class="row">
             {% block content %}
             {% endblock %}
         </div>
     </div>
+
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
 </body>
 </html>
