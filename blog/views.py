@@ -38,3 +38,30 @@ def post_new(request):
             'form': form
         }
         return render(request, 'blog/post_edit.html', form_for_frontend)
+
+
+def post_edit(request, primary_key):
+    post = get_object_or_404(Post, pk=primary_key)
+
+    # if request is POST then save the new details
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.published_date = timezone.now()
+            post.save()
+            return redirect('post_details', primary_key=primary_key)
+    # else render the edit form with pre-filled values
+    else:
+        form = PostForm(instance=post)
+        form_for_frontend = {
+            'form': form,
+            'post': post
+        }
+        print(request.GET)
+        return render(request, 'blog/post_edit.html', form_for_frontend)
+
+
+def post_delete(request):
+    pass
