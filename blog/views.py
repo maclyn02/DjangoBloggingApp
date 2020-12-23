@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .add_form import PostForm
@@ -29,6 +30,7 @@ def post_details(request, primary_key):
     return render(request, 'blog/post_details.html', post_for_front_end)
 
 
+@login_required
 def post_new(request):
     # If request is POST (i.e) form is being submitted
     if request.method == 'POST':
@@ -48,6 +50,7 @@ def post_new(request):
         return render(request, 'blog/post_edit.html', form_for_frontend)
 
 
+@login_required
 def post_publish(request, primary_key):
     # Find the post using primary_key
     post = get_object_or_404(Post, pk=primary_key)
@@ -56,6 +59,7 @@ def post_publish(request, primary_key):
     return redirect('post_list')
 
 
+@login_required
 def post_edit(request, primary_key):
     post = get_object_or_404(Post, pk=primary_key)
 
@@ -77,5 +81,6 @@ def post_edit(request, primary_key):
         return render(request, 'blog/post_edit.html', form_for_frontend)
 
 
+@login_required
 def post_delete(request):
     pass

@@ -26,9 +26,11 @@ SECRET_KEY = '7!6c#1r9w93wei_-bux+0)vi*kdq!wmok_dh3#6)jf0x_ebg!p'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'localhost',
     '127.0.0.1'
 ]
+
+LOGIN_REDIRECT_URL = 'post_list'
+LOGOUT_REDIRECT_URL = 'post_list'
 
 
 # Application definition
