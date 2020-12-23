@@ -54,3 +54,27 @@ body a{
 .create-form textarea{
     width: 100%;
 }
+
+.details-title, .details-author{
+    background-color: lavenderblush;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.details-title, .details-text, .details-author{
+    padding: 20px;
+}
+
+.details-header-row{
+    display: flex;
+    justify-content: space-between;
+}
+
+.fas {
+    padding: 10px;
+    color: dimgray;
+    font-size: 20px;
+}
+.fas:hover{
+    color: darkslategray;
+}

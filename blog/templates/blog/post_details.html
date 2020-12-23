@@ -3,10 +3,16 @@
 {% block content %}
     {% if post_details.published_date %}
     <div class="">
-        <p class="date">{{ post_details.published_date }}</p>
-        <h1>{{ post_details.title }}</h1>
-        <p>{{ post_details.text | linebreaksbr }}</p>
-        <p class="author">By : {{ post_details.author }}</p>
+        <div class="details-header-row">
+            <p class="date">{{ post_details.published_date }}</p>
+            <div>
+                <i class="fas fa-edit"></i>
+                <i class="fas fa-trash"></i>
+            </div>
+        </div>
+        <h1 class="details-title">{{ post_details.title }}</h1>
+        <p class="details-text">{{ post_details.text | linebreaksbr }}</p>
+        <p class="details-author">By : {{ post_details.author }}</p>
     </div>
     {% endif %}
 {% endblock %}
