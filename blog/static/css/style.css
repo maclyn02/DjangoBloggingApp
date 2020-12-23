@@ -78,3 +78,20 @@ body a{
 .details-header-row .fas:hover{
     color: darkslategray;
 }
+
+.no-posts-message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 100%;
+    height: 80vh;
+    margin: auto;
+    background: whitesmoke;
+    border-radius: 40px;
+}
+
+.no-posts-message>div, .no-posts-message .fas{
+    text-align: center;
+    padding: 20px;
+    font-size: 40px;
+}

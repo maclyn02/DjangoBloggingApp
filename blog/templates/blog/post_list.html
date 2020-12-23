@@ -1,15 +1,22 @@
 {% extends 'blog/base_page.html' %}
 
 {% block content %}
-    {% for post in posts %}
-    <div class="row-content">
-        {% if post.published_date %}
-            <p class="date">Published: {{ post.published_date }} </p>
-        {% else %}
-            <p class="date">Created: {{ post.created_date }} </p>
-        {% endif %}
-        <h2><a href="{% url 'post_details' primary_key=post.pk %}"> {{ post.title }} </a></h2>
-        <p> {{ post.text | linebreaksbr }} </p>
+    {% if posts|length > 0 %}
+        {% for post in posts %}
+            <div class="row-content">
+                {% if post.published_date %}
+                    <p class="date">Published: {{ post.published_date }} </p>
+                {% else %}
+                    <p class="date">Created: {{ post.created_date }} </p>
+                {% endif %}
+                <h2><a href="{% url 'post_details' primary_key=post.pk %}"> {{ post.title }} </a></h2>
+                <p> {{ post.text | linebreaksbr }} </p>
+            </div>
+        {% endfor %}
+    {% else %}
+    <div class="no-posts-message">
+        <div><i class="fas fa-check-circle"></i></div>
+        <div>No Posts to view!</div>
     </div>
-    {% endfor %}
+    {% endif %}
 {% endblock %}
