@@ -29,6 +29,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1'
 ]
 
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
 LOGIN_REDIRECT_URL = 'post_list'
 LOGOUT_REDIRECT_URL = 'post_list'
 
@@ -42,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    'crispy_forms'
 ]
 
 MIDDLEWARE = [

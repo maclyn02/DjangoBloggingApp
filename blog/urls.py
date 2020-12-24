@@ -20,5 +20,6 @@ urlpatterns = [
     path('post/<int:primary_key>/comment/<int:comment_key>/dislike', views.dislike_comment, name='dislike_comment'),
     path('post/<int:primary_key>/comment/<int:comment_key>/delete', views.delete_comment, name='delete_comment'),
     path('post/<int:primary_key>/comment/<int:comment_key>/approve', views.approve_comment, name='approve_comment'),
+    path('signup/', views.signup, name='signup'),
 
 ]

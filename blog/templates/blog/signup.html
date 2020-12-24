@@ -1,0 +1,12 @@
+{% extends 'blog/base_page.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="panel panel-default">
+    <h3 style="text-align: center">Sign up!</h3>
+    <div class="panel-body">
+        {% crispy form %}
+    </div>
+</div>
+{% endblock %}

@@ -35,6 +35,8 @@
         <span class="copyright"><i class="far fa-copyright"></i> Maclyn Afonso 2019-2021</span>
         {% if user.is_authenticated %}
             <span class="logged-in-user">Logged in as {{ user.username }}</span>
+        {% else %}
+            <a href="{% url 'signup' %}" class="signup-link">Sign up?</a>
         {% endif %}
     </div>
 

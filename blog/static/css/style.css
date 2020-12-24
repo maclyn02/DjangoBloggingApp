@@ -35,7 +35,7 @@ body a{
 }
 
 
-.logged-in-user, .copyright{
+.logged-in-user, .copyright, .signup-link{
     font-style: italic;
     font-size: 20px;
     color: lightsteelblue;
