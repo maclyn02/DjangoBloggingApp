@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from .add_form import PostForm
-from .models import Post
+from .add_form import PostForm, CommentForm
+from .models import Post, Comment
 
 
 # Create your views here.
@@ -24,8 +24,10 @@ def post_draft_list(request):
 
 def post_details(request, primary_key):
     post = get_object_or_404(Post, pk=primary_key)
+    comments = Comment.objects.filter(post=primary_key).order_by('-created_date')
     post_for_front_end = {
-        'post_details': post
+        'post_details': post,
+        'comments': comments
     }
     return render(request, 'blog/post_details.html', post_for_front_end)
 
@@ -54,7 +56,7 @@ def post_new(request):
 def post_publish(request, primary_key):
     # Find the post using primary_key
     post = get_object_or_404(Post, pk=primary_key)
-    post.published_date = timezone.now()
+    post.publish()
     post.save()
     return redirect('post_list')
 
@@ -82,5 +84,45 @@ def post_edit(request, primary_key):
 
 
 @login_required
-def post_delete(request):
-    pass
+def comment_create(request, primary_key):
+    post = get_object_or_404(Post, pk=primary_key)
+    if request.method == 'POST':
+        print(request.POST)
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.author = request.user
+            comment.save()
+        else:
+            print('failed validation')
+
+    return redirect('post_details', primary_key=primary_key)
+
+
+def like_comment(request, primary_key, comment_key):
+    comment = get_object_or_404(Comment, pk=comment_key)
+    comment.like()
+    comment.save()
+    return redirect('post_details', primary_key=primary_key)
+
+
+def dislike_comment(request, primary_key, comment_key):
+    comment = get_object_or_404(Comment, pk=comment_key)
+    comment.dislike()
+    comment.save()
+    return redirect('post_details', primary_key=primary_key)
+
+
+@login_required
+def delete_comment(request, primary_key, comment_key):
+    comment = get_object_or_404(Comment, pk=comment_key)
+    comment.delete()
+    return redirect('post_details', primary_key=primary_key)
+
+
+@login_required
+def post_delete(request, primary_key):
+    post = get_object_or_404(Post, pk=primary_key)
+    post.delete()
+    return redirect('post_list')

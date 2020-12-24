@@ -13,5 +13,11 @@ urlpatterns = [
 
     path('accounts/login/', auth_views.LoginView.as_view(template_name='blog/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
-    path('accounts/profile/', views.post_list, name='post_list')
+    path('accounts/profile/', views.post_list, name='post_list'),
+
+    path('post/<int:primary_key>/comment/', views.comment_create, name='comment_create'),
+    path('post/<int:primary_key>/comment/<int:comment_key>/like', views.like_comment, name='like_comment'),
+    path('post/<int:primary_key>/comment/<int:comment_key>/dislike', views.dislike_comment, name='dislike_comment'),
+    path('post/<int:primary_key>/comment/<int:comment_key>/delete', views.delete_comment, name='delete_comment'),
+
 ]
