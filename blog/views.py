@@ -84,6 +84,13 @@ def post_edit(request, primary_key):
 
 
 @login_required
+def post_delete(request, primary_key):
+    post = get_object_or_404(Post, pk=primary_key)
+    post.delete()
+    return redirect('post_list')
+
+
+@login_required
 def comment_create(request, primary_key):
     post = get_object_or_404(Post, pk=primary_key)
     if request.method == 'POST':
@@ -122,7 +129,8 @@ def delete_comment(request, primary_key, comment_key):
 
 
 @login_required
-def post_delete(request, primary_key):
-    post = get_object_or_404(Post, pk=primary_key)
-    post.delete()
-    return redirect('post_list')
+def approve_comment(request, primary_key, comment_key):
+    comment = get_object_or_404(Comment, pk=comment_key)
+    comment.approve()
+    comment.save()
+    return redirect('post_details', primary_key=primary_key)

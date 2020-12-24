@@ -11,6 +11,7 @@
                 {% endif %}
                 <h2><a href="{% url 'post_details' primary_key=post.pk %}"> {{ post.title }} </a></h2>
                 <p> {{ post.text | truncatechars:50 }} </p>
+                <span>Approved Comments: {{ post.approved_comments.count }}</span>
             </div>
         {% endfor %}
     {% else %}

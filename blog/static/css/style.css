@@ -151,7 +151,7 @@ body a{
     color: brown;
 }
 
-.comment-body .delete{
+.comment-body .delete, .comment-body .approve{
     margin: 10px;
     color: black;
 }

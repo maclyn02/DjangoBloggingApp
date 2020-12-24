@@ -26,18 +26,23 @@
         <p class="details-text">{{ post_details.text | linebreaksbr }}</p>
         <p class="details-author">Author : {{ post_details.author }}</p>
         <div class="comments-container">
-            <span class="comment-header"><i class="fas fa-comments"></i> {{ comments|length }} Comments</span>
+            <span class="comment-header"><i class="fas fa-comments"></i> Comments</span>
             {% for comment in comments %}
-                <div class="comment-body">
-                    <div class="comment-date">{{ comment.created_date|date:'d-m-Y' }}</div>
-                    <div class="comment-author">{{ comment.author }}</div>
-                    <div>{{ comment.text }}</div>
-                    <div>
-                        <a href="{% url 'like_comment' primary_key=post_details.pk comment_key=comment.id %}" class="like"><i class="fas fa-thumbs-up"></i> {{ comment.likes }}</a>
-                        <a href="{% url 'dislike_comment' primary_key=post_details.pk comment_key=comment.id %}" class="dislike"><i class="fas fa-thumbs-down"></i> {{ comment.dislikes }}</a>
-                        <a href="{% url 'delete_comment' primary_key=post_details.pk comment_key=comment.id %}" class="delete"><i class="fas fa-trash"></i></a>
+                {% if user.is_authenticated or comment.approved %}
+                    <div class="comment-body">
+                        <div class="comment-date">{{ comment.created_date|date:'d-m-Y' }}</div>
+                        <div class="comment-author">{{ comment.author }}</div>
+                        <div>{{ comment.text }}</div>
+                        <div>
+                            <a href="{% url 'like_comment' primary_key=post_details.pk comment_key=comment.id %}" class="like"><i class="fas fa-thumbs-up"></i> {{ comment.likes }}</a>
+                            <a href="{% url 'dislike_comment' primary_key=post_details.pk comment_key=comment.id %}" class="dislike"><i class="fas fa-thumbs-down"></i> {{ comment.dislikes }}</a>
+                            <a href="{% url 'delete_comment' primary_key=post_details.pk comment_key=comment.id %}" class="delete" data-toggle="tooltip" title="Delete"><i class="fas fa-trash"></i></a>
+                            {% if user.is_superuser %}
+                                <a href="{% url 'approve_comment' primary_key=post_details.pk comment_key=comment.id %}" class="approve" data-toggle="tooltip" title="Approve"><i class="fas fa-check-circle"></i> {{ comment.approved }}</a>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
             {% if user.is_authenticated %}
                 <div class="comment-form">

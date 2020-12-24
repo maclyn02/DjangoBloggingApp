@@ -10,22 +10,25 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True)
     approved = models.BooleanField(default=False)
 
+    def __str__(self):
+        return str(f"{self.title} by {self.author}")
+
     def publish(self):
         self.published_date = timezone.now()
         self.save()
 
-    # Create string representation -> when you try to print a class, it will print the title instead
-    def __str__(self):
-        return str(f"{self.title} by {self.author}")
+    def approved_comments(self):
+        return self.comments.filter(approved=True)
 
 
 class Comment(models.Model):
-    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE)
+    post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     likes = models.IntegerField(default=0)
     dislikes = models.IntegerField(default=0)
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return str(f"{self.text}")
@@ -35,3 +38,6 @@ class Comment(models.Model):
 
     def dislike(self):
         self.dislikes = self.dislikes + 1
+
+    def approve(self):
+        self.approved = True
