@@ -73,10 +73,15 @@ body a{
     width: 100%;
 }
 
-.details-title, .details-author{
+.details-title{
     background-color: lavenderblush;
     border-radius: 10px;
     font-weight: bold;
+}
+.details-author{
+    font-weight: bold;
+    border-bottom: solid;
+    margin-bottom: 50px;
 }
 
 .details-title, .details-text, .details-author{
@@ -119,4 +124,51 @@ body a{
     background-color: lightpink;
     border-radius: 20px;
     font-size: 20px;
+}
+
+.comment-header{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.comment-body div{
+    padding: 10px 10px 10px 10px;
+}
+
+.comment-body{
+    background-color: aliceblue;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.comment-body .like{
+    margin: 10px;
+    color: darkcyan;
+}
+
+.comment-body .dislike{
+    margin: 10px;
+    color: brown;
+}
+
+.comment-body .delete{
+    margin: 10px;
+    color: black;
+}
+
+.comment-date, .comment-author{
+    font-weight: bolder;
+}
+
+.comment-form{
+    margin-top: 20px;
+}
+
+.comment-form input{
+    width: 95%;
+    height: 40px;
+}
+.comment-form button{
+    float: right;
+    height: 40px;
 }
